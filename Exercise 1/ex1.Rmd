@@ -1,18 +1,93 @@
 ---
 title: "R Notebook"
 output: html_notebook
+header-includes:
+   - \usepackage{bbm}
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyverse)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+dat = read.csv('data_ex1.csv')
+dat
+attach(dat)
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+a) Make a drawing of those observations
+
+```{r}
+p=ggplot(data = dat,aes(x = reorder(country, -percent_agricultural_population))) +
+  geom_col(aes(y=percent_agricultural_population,group = 1), fill="steelblue") +
+  geom_line(aes(y=calories_per_day_per_person/60,group = 1),colour="red",size=1.5) +
+  scale_y_continuous(sec.axis = sec_axis(~.*60, name = "calories/day/person"))+
+  labs(y = "% agricultural population", x = "Country") +
+  theme(
+    axis.title.y = element_text(color = "steelblue"),
+    axis.title.y.right = element_text(color = "red")
+  ) +
+  ggtitle("% agricultural population vs calories/day/person ")
+p
+```
+
+
+```{r}
+ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_person)) + 
+  geom_point(shape=18,color="blue",size=2)+
+  geom_text(aes(label=country),hjust=0, vjust=0)
+```
+
+b) Estimate the parameters of the model:
+Yi = β0 + β1.xi + εi
+
+```{r}
+LM = lm(calories_per_day_per_person~percent_agricultural_population)
+LM$coefficients
+```
+
+β0 = "(Intercept)" = 3346.12221
+β1 = "percent_agricultural_population" = -17.16353
+
+```{r}
+ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_person)) + 
+  geom_point(shape=18,color="blue",size=2)+
+  geom_text(aes(label=country),hjust=0, vjust=0)+
+  geom_abline(intercept = LM$coefficients[1], slope = LM$coefficients[2],color="red")
+```
+
+c) Explain the different outputs of the lm funtions used in the R software and precise the
+tests that are performed and how they are performed.
+
+```{r}
+summary(LM)
+```
+
+Residuals:
+Difference between observed value and the one predicted by the model.
+We look for a symmetric distribution of the residuals around 0
+
+Coefficients:
+Estimate: Estimation of β0 and β1 of our model.
+Std. Error: is the standard deviation of the estimate
+t value: Estimate / Std. error
+Pr(>|t|): probability to observe value larger than t
+Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
+$$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) $$
+
+with $$\widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}}$$
+
+Residual standard error:
+
+Multiple R-squared:
+
+Adjusted R-squared:
+
+F-statistic:
+
+p-value:
+
+F-Statistics is a test to validate the model: 
+it's a global Fisher Test with H0: β1 = 0 , H1 β1 != 0
