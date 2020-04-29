@@ -17,7 +17,7 @@ dat
 attach(dat)
 ```
 
-a) Make a drawing of those observations
+### <u>a) Make a drawing of those observations</u>
 
 ```{r}
 p=ggplot(data = dat,aes(x = reorder(country, -percent_agricultural_population))) +
@@ -40,54 +40,74 @@ ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_p
   geom_text(aes(label=country),hjust=0, vjust=0)
 ```
 
-b) Estimate the parameters of the model:
-Yi = β0 + β1.xi + εi
+### <u>b) Estimate the parameters of the model: Yi = β0 + β1.xi + εi</u>
 
 ```{r}
 LM = lm(calories_per_day_per_person~percent_agricultural_population)
 LM$coefficients
 ```
 
-β0 = "(Intercept)" = 3346.12221
-β1 = "percent_agricultural_population" = -17.16353
+- β0 = "(Intercept)" = 3346.12221
+- β1 = "percent_agricultural_population" = -17.16353
 
-```{r}
-ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_person)) + 
-  geom_point(shape=18,color="blue",size=2)+
-  geom_text(aes(label=country),hjust=0, vjust=0)+
-  geom_abline(intercept = LM$coefficients[1], slope = LM$coefficients[2],color="red")
-```
 
-c) Explain the different outputs of the lm funtions used in the R software and precise the
-tests that are performed and how they are performed.
+### <u>c) Explain the different outputs of the lm funtions used in the R software and precise the tests that are performed and how they are performed.</u>
 
 ```{r}
 summary(LM)
 ```
 
-Residuals:
-Difference between observed value and the one predicted by the model.
-We look for a symmetric distribution of the residuals around 0
+- Residuals:
 
-Coefficients:
-Estimate: Estimation of β0 and β1 of our model.
-Std. Error: is the standard deviation of the estimate
-t value: Estimate / Std. error
-Pr(>|t|): probability to observe value larger than t
-Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
-$$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) $$
+  Difference between observed value and the one predicted by the model.
+  We look for a symmetric distribution of the residuals around 0
 
-with $$\widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}}$$
+- Coefficients:
+  - Estimate: Estimation of β0 and β1 of our model.
+  - Std. Error: is the standard deviation of the estimate
+  - t value: Estimate / Std. error
+  - Pr(>|t|): probability to observe value larger than t
+    Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
+    $$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) $$
 
-Residual standard error:
+    with $$\widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}}$$
 
-Multiple R-squared:
+- Residual standard error:
 
-Adjusted R-squared:
+- Multiple R-squared:
 
-F-statistic:
+- Adjusted R-squared:
 
-p-value:
+- F-statistic:
 
-F-Statistics is a test to validate the model: 
-it's a global Fisher Test with H0: β1 = 0 , H1 β1 != 0
+  - p-value:
+
+  F-Statistics is a test to validate the model: 
+  it's a global Fisher Test with H0: β1 = 0 , H1 β1 != 0
+
+### <u>d) Construt a confidence interval at 95% for the regression curve, at a point x0</u>
+
+
+## **cf cours 20091212 page 5/15**
+
+
+```{r}
+pred = predict(LM, dat,interval="confidence")
+```
+
+
+### <u>e) Draw the points, the regression curve and the curves associated to the confident interval on the same graphic.</u>
+
+```{r}
+dat2 = cbind(dat,pred)
+ggplot(data=dat2 ) + 
+  geom_point(aes(x=percent_agricultural_population, y=calories_per_day_per_person),shape=18,color="blue",size=2)+
+  geom_text(aes(x=percent_agricultural_population, y=calories_per_day_per_person,label=country),hjust=0, vjust=0)+
+  geom_line(aes(x=percent_agricultural_population, y=fit),col="red") + 
+  geom_line(aes(x=percent_agricultural_population, y=lwr),linetype = "dashed",col="red") + 
+  geom_line(aes(x=percent_agricultural_population, y=upr),linetype = "dashed",col="red")
+
+```
+
+
+
