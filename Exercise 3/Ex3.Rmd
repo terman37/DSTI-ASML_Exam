@@ -1,0 +1,60 @@
+---
+title: "ASML EXAM Exercise 3"
+output: html_notebook
+header-includes:
+   - \usepackage{bbm}
+---
+
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r}
+load(file = "test2.RData")
+dat=data2
+```
+
+```{r}
+head(dat)
+```
+
+
+### <u>(a) Perform the multiple regression model and analyse all the outputs that are available.</u>
+
+```{r}
+LM = lm(Y~.,data = dat)
+```
+
+```{r}
+plot(LM,3)
+```
+
+```{r}
+plot(LM,2)
+```
+
+```{r}
+summary(LM)
+```
+
+### <u>(b) Is this model interesting?</u>
+
+
+
+### <u>(c) Perform a non-linear model and analyse it.</u>
+
+```{r}
+GLM = glm(Y~.,data = dat)
+```
+
+```{r}
+summary(GLM)
+```
+
+### <u>(d) What are the variables that are really connected to the response variable?</u>
+
+```{r}
+step(GLM)
+```
+

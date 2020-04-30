@@ -1,18 +1,57 @@
 ---
-title: "R Notebook"
+title: "ASML EXAM Exercise 2"
 output: html_notebook
+header-includes:
+   - \usepackage{bbm}
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyverse)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+```{r}
+load(file = "test1.RData")
+dat=data
+attach(dat)
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+head(dat)
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+### <u>a) Perform the multiple regression model and analyse all the outputs that are available</u>
+
+```{r}
+LM = lm(Y~.,data = dat)
+```
+
+Before analysing the outputs of test, we need to check assumptions on the noise
+- Homoscedasticity: plot standardized residuals vs fitted values they seems spread equally along the ranges of predictors. 
+- Gaussianity: Normal QQPlot, majority of the points are on the line
+- Independency: as we have no informations we assume they are independent
+
+```{r}
+plot(LM,3)
+```
+
+```{r}
+plot(LM,2)
+```
+
+Analysis of the output:
+
+```{r}
+summary(LM)
+```
+
+
+# **TODO**
+
+
+### <u>b) What are the variables that are really connected to the response variable</u>
+
+
+```{r}
+step(LM)
+```

@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "ASML EXAM Exercise 1"
 output: html_notebook
 header-includes:
    - \usepackage{bbm}
@@ -20,21 +20,6 @@ attach(dat)
 ### <u>a) Make a drawing of those observations</u>
 
 ```{r}
-p=ggplot(data = dat,aes(x = reorder(country, -percent_agricultural_population))) +
-  geom_col(aes(y=percent_agricultural_population,group = 1), fill="steelblue") +
-  geom_line(aes(y=calories_per_day_per_person/60,group = 1),colour="red",size=1.5) +
-  scale_y_continuous(sec.axis = sec_axis(~.*60, name = "calories/day/person"))+
-  labs(y = "% agricultural population", x = "Country") +
-  theme(
-    axis.title.y = element_text(color = "steelblue"),
-    axis.title.y.right = element_text(color = "red")
-  ) +
-  ggtitle("% agricultural population vs calories/day/person ")
-p
-```
-
-
-```{r}
 ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_person)) + 
   geom_point(shape=18,color="blue",size=2)+
   geom_text(aes(label=country),hjust=0, vjust=0)
@@ -49,7 +34,6 @@ LM$coefficients
 
 - β0 = "(Intercept)" = 3346.12221
 - β1 = "percent_agricultural_population" = -17.16353
-
 
 ### <u>c) Explain the different outputs of the lm funtions used in the R software and precise the tests that are performed and how they are performed.</u>
 
