@@ -52,9 +52,10 @@ summary(LM)
   - t value: Estimate / Std. error
   - Pr(>|t|): probability to observe value larger than t
     Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
-    $$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) $$
-
-    with $$\widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}}$$
+    
+    $$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) 
+    with 
+     \widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}} $$
 
 - Residual standard error:
 
