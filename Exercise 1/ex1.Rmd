@@ -54,14 +54,23 @@ summary(LM)
     Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
     
     $$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) 
-    with 
+    with:
      \widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}} $$
 
 - Residual standard error:
 
-- Multiple R-squared:
+- Multiple R-squared: 
+  
+  $$ R^{2} =\frac{\sum_{i=1}^{n}\left ( \widehat{Y_{i}}-\overline{Y_{n}} \right )^{2}}{\sum_{i=1}^{n}\left ( Y_{i}-\overline{Y_{n}} \right )^{2}} $$
+  also called coefficient of determination = variance explained / total variance = 1 - (variance of residuals / variance total)
+  
+  gives information about goodness of fit of the model, should be close to one to be a correct linear model
 
 - Adjusted R-squared:
+  
+  corrected version of R², taking unbiased estimator for the variances 
+
+  $$ R_{adj}^{2}=1-\frac{n-1}{n-p-1}\left ( 1-R^{2} \right ) with: p\ nb\ of\ model\ in\ parameters $$
 
 - F-statistic:
 
