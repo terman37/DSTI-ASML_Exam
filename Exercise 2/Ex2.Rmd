@@ -46,12 +46,25 @@ summary(LM)
 ```
 
 
-# **TODO**
+- Adjusted R-squared = 1 --> all the variance can be explained by the model: use of linear model is ok.
+- Fisher test p-value < 5% --> we reject H0 which is all parameters coefficients equal 0.
 
+- X1, X4, X7 seems to be the more influent variables on the model. 
 
 ### <u>b) What are the variables that are really connected to the response variable</u>
 
+We are going to perform variable selection using a backward step by step method. this means we are going to consider the full model and remove at each step the worst explanatory variable until no further improvement.
+
+for selecting which variable to remove we will use the AIC (Akaike information criterion) $$ AIC = 2k - 2ln(\widehat{L}) $$
 
 ```{r}
-step(LM)
+step(LM,direction = "backward")
 ```
+
+- we can see that variables explaining the response are X1, X4, X6 and X7.
+
+```{r}
+LMbest = lm(Y~X1+X4+X6+X7,data = dat)
+summary(LMbest)
+```
+
