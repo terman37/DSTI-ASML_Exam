@@ -27,6 +27,7 @@ LM = lm(Y~.,data = dat)
 ```
 
 Before analysing the outputs of test, we need to check assumptions on the noise
+
 - Homoscedasticity: plot standardized residuals vs fitted values they seems spread equally along the ranges of predictors. 
 - Gaussianity: Normal QQPlot, majority of the points are on the line
 - Independency: as we have no informations we assume they are independent

@@ -1856,9 +1856,15 @@ F-statistic: 62.24 on 9 and 490 DF,  p-value: &lt; 2.2e-16</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<ul>
+<li>Adjusted R-squared is not close to 1: the linear model will not be able to explain all the variance</li>
+<li>noise is gaussian: following staright line on QQplot</li>
+<li>we can see also that noise is not homoscedastic: points are not spread equally on standardized residuals vs fitted values</li>
+</ul>
 </div>
 <div id="b-is-this-model-interesting" class="section level3">
 <h3><u>(b) Is this model interesting?</u></h3>
+<p>Model is not interresting, noise assumptions are not satisfied and Adjusted R-squared is not good.</p>
 </div>
 <div id="c-perform-a-non-linear-model-and-analyse-it." class="section level3">
 <h3><u>(c) Perform a non-linear model and analyse it.</u></h3>
@@ -1874,35 +1880,35 @@ F-statistic: 62.24 on 9 and 490 DF,  p-value: &lt; 2.2e-16</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShHTE0pXG5gYGAifQ== -->
 <pre class="r"><code>summary(GLM)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBZIH4gLiwgZGF0YSA9IGRhdClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICBNaW4gICAgICAgMVEgICBNZWRpYW4gICAgICAgM1EgICAgICBNYXggIFxuLTMuMjc1NiAgLTAuODYyNiAgLTAuMDQzOCAgIDAuODkwMiAgIDQuMzYyNiAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA0LjQ5NDg3ICAgIDAuNTA4NTAgICA4Ljg0MCAgPCAyZS0xNiAqKipcblgxICAgICAgICAgIC0xLjMyMzExICAgIDAuMTAzMTcgLTEyLjgyNCAgPCAyZS0xNiAqKipcblgyICAgICAgICAgIC0wLjAzNTMyICAgIDAuMTEwNzEgIC0wLjMxOSAgIDAuNzQ5OCAgICBcblgzICAgICAgICAgICAwLjI2MTQ4ICAgIDAuMjQ1NDkgICAxLjA2NSAgIDAuMjg3MyAgICBcblg0ICAgICAgICAgIC0wLjIwNDc0ICAgIDAuMDEwOTEgLTE4Ljc3MCAgPCAyZS0xNiAqKipcblg1ICAgICAgICAgICAwLjA3MzUyICAgIDAuMDMwMDUgICAyLjQ0NyAgIDAuMDE0OCAqICBcblg2ICAgICAgICAgIC0wLjAyMzYwICAgIDAuMDQwOTggIC0wLjU3NiAgIDAuNTY1MCAgICBcblg3ICAgICAgICAgICAwLjcyMDcwICAgIDAuMTI2NDMgICA1LjcwMCAyLjA3ZS0wOCAqKipcblg4ICAgICAgICAgIC0wLjA0OTk5ICAgIDAuMTE5NzkgIC0wLjQxNyAgIDAuNjc2NiAgICBcblg5ICAgICAgICAgICAwLjEwNTkyICAgIDAuMTIyMjMgICAwLjg2NyAgIDAuMzg2NiAgICBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG4oRGlzcGVyc2lvbiBwYXJhbWV0ZXIgZm9yIGdhdXNzaWFuIGZhbWlseSB0YWtlbiB0byBiZSAxLjc3MTYyMilcblxuICAgIE51bGwgZGV2aWFuY2U6IDE4NjAuNTQgIG9uIDQ5OSAgZGVncmVlcyBvZiBmcmVlZG9tXG5SZXNpZHVhbCBkZXZpYW5jZTogIDg2OC4wOSAgb24gNDkwICBkZWdyZWVzIG9mIGZyZWVkb21cbkFJQzogMTcxNi44XG5cbk51bWJlciBvZiBGaXNoZXIgU2NvcmluZyBpdGVyYXRpb25zOiAyXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBZIH4gLiwgZGF0YSA9IGRhdClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICAgIE1pbiAgICAgICAgIDFRICAgICBNZWRpYW4gICAgICAgICAzUSAgICAgICAgTWF4ICBcbi0wLjI5ODE1NyAgLTAuMDYzODI4ICAgMC4wMDAzMjcgICAwLjA2NDIyNyAgIDAuMjg3ODExICBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICAyLjAyNjE3NjAgIDAuMDM3Nzk2NyAgICA1My42MDcgICA8MmUtMTYgKioqXG5YMSAgICAgICAgICAgMy4wMDIzODIzICAwLjAwNzY2ODggICAzOTEuNTA5ICAgPDJlLTE2ICoqKlxuWDIgICAgICAgICAgLTAuMDAyNzMzNiAgMC4wMDgyMjg5ICAgIC0wLjMzMiAgIDAuNzM5OSAgICBcblgzICAgICAgICAgIC0wLjAyMDU1NjYgIDAuMDE4MjQ3NSAgICAtMS4xMjcgICAwLjI2MDUgICAgXG5YNCAgICAgICAgICAtMy4wMDA0NjM2ICAwLjAwMDgxMDggLTM3MDAuNzAzICAgPDJlLTE2ICoqKlxuWDUgICAgICAgICAgLTAuMDAyMjgzNCAgMC4wMDIyMzMzICAgIC0xLjAyMiAgIDAuMzA3MSAgICBcblg2ICAgICAgICAgIC0wLjAwNjMyODYgIDAuMDAzMDQ2MSAgICAtMi4wNzggICAwLjAzODMgKiAgXG5YNyAgICAgICAgICAtMS4wMTU4OTM1ICAwLjAwOTM5NzYgIC0xMDguMTAxICAgPDJlLTE2ICoqKlxuWDggICAgICAgICAgLTAuMDAyNDczNiAgMC4wMDg5MDM5ICAgIC0wLjI3OCAgIDAuNzgxMyAgICBcblg5ICAgICAgICAgIC0wLjAwNDExMjIgIDAuMDA5MDg1NyAgICAtMC40NTMgICAwLjY1MTAgICAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuKERpc3BlcnNpb24gcGFyYW1ldGVyIGZvciBnYXVzc2lhbiBmYW1pbHkgdGFrZW4gdG8gYmUgMC4wMDk3ODgxMzEpXG5cbiAgICBOdWxsIGRldmlhbmNlOiAxLjM4MDJlKzA1ICBvbiA0OTkgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuUmVzaWR1YWwgZGV2aWFuY2U6IDQuNzk2MmUrMDAgIG9uIDQ5MCAgZGVncmVlcyBvZiBmcmVlZG9tXG5BSUM6IC04ODIuNDZcblxuTnVtYmVyIG9mIEZpc2hlciBTY29yaW5nIGl0ZXJhdGlvbnM6IDJcbiJ9 -->
 <pre><code>
 Call:
 glm(formula = Y ~ ., data = dat)
 
 Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--3.2756  -0.8626  -0.0438   0.8902   4.3626  
+      Min         1Q     Median         3Q        Max  
+-0.298157  -0.063828   0.000327   0.064227   0.287811  
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  4.49487    0.50850   8.840  &lt; 2e-16 ***
-X1          -1.32311    0.10317 -12.824  &lt; 2e-16 ***
-X2          -0.03532    0.11071  -0.319   0.7498    
-X3           0.26148    0.24549   1.065   0.2873    
-X4          -0.20474    0.01091 -18.770  &lt; 2e-16 ***
-X5           0.07352    0.03005   2.447   0.0148 *  
-X6          -0.02360    0.04098  -0.576   0.5650    
-X7           0.72070    0.12643   5.700 2.07e-08 ***
-X8          -0.04999    0.11979  -0.417   0.6766    
-X9           0.10592    0.12223   0.867   0.3866    
+              Estimate Std. Error   t value Pr(&gt;|t|)    
+(Intercept)  2.0261760  0.0377967    53.607   &lt;2e-16 ***
+X1           3.0023823  0.0076688   391.509   &lt;2e-16 ***
+X2          -0.0027336  0.0082289    -0.332   0.7399    
+X3          -0.0205566  0.0182475    -1.127   0.2605    
+X4          -3.0004636  0.0008108 -3700.703   &lt;2e-16 ***
+X5          -0.0022834  0.0022333    -1.022   0.3071    
+X6          -0.0063286  0.0030461    -2.078   0.0383 *  
+X7          -1.0158935  0.0093976  -108.101   &lt;2e-16 ***
+X8          -0.0024736  0.0089039    -0.278   0.7813    
+X9          -0.0041122  0.0090857    -0.453   0.6510    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-(Dispersion parameter for gaussian family taken to be 1.771622)
+(Dispersion parameter for gaussian family taken to be 0.009788131)
 
-    Null deviance: 1860.54  on 499  degrees of freedom
-Residual deviance:  868.09  on 490  degrees of freedom
-AIC: 1716.8
+    Null deviance: 1.3802e+05  on 499  degrees of freedom
+Residual deviance: 4.7962e+00  on 490  degrees of freedom
+AIC: -882.46
 
 Number of Fisher Scoring iterations: 2</code></pre>
 <!-- rnb-output-end -->
@@ -2007,7 +2013,7 @@ Residual Deviance: 873.1    AIC: 1710</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFTTUwgRVhBTSBFeGVyY2lzZSAzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQpoZWFkZXItaW5jbHVkZXM6DQogICAtIFx1c2VwYWNrYWdle2JibX0NCi0tLQ0KDQpgYGB7ciB3YXJuaW5nPUZBTFNFfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KYGBge3J9DQpsb2FkKGZpbGUgPSAidGVzdDIuUkRhdGEiKQ0KZGF0PWRhdGEyDQpgYGANCg0KYGBge3J9DQpoZWFkKGRhdCkNCmBgYA0KDQoNCiMjIyA8dT4oYSkgUGVyZm9ybSB0aGUgbXVsdGlwbGUgcmVncmVzc2lvbiBtb2RlbCBhbmQgYW5hbHlzZSBhbGwgdGhlIG91dHB1dHMgdGhhdCBhcmUgYXZhaWxhYmxlLjwvdT4NCg0KYGBge3J9DQpMTSA9IGxtKFl+LixkYXRhID0gZGF0KQ0KYGBgDQoNCmBgYHtyfQ0KcGxvdChMTSwzKQ0KYGBgDQoNCmBgYHtyfQ0KcGxvdChMTSwyKQ0KYGBgDQoNCmBgYHtyfQ0Kc3VtbWFyeShMTSkNCmBgYA0KDQojIyMgPHU+KGIpIElzIHRoaXMgbW9kZWwgaW50ZXJlc3Rpbmc/PC91Pg0KDQoNCg0KIyMjIDx1PihjKSBQZXJmb3JtIGEgbm9uLWxpbmVhciBtb2RlbCBhbmQgYW5hbHlzZSBpdC48L3U+DQoNCmBgYHtyfQ0KR0xNID0gZ2xtKFl+LixkYXRhID0gZGF0KQ0KYGBgDQoNCmBgYHtyfQ0Kc3VtbWFyeShHTE0pDQpgYGANCg0KIyMjIDx1PihkKSBXaGF0IGFyZSB0aGUgdmFyaWFibGVzIHRoYXQgYXJlIHJlYWxseSBjb25uZWN0ZWQgdG8gdGhlIHJlc3BvbnNlIHZhcmlhYmxlPzwvdT4NCg0KYGBge3J9DQpzdGVwKEdMTSkNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFTTUwgRVhBTSBFeGVyY2lzZSAzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQpoZWFkZXItaW5jbHVkZXM6DQogICAtIFx1c2VwYWNrYWdle2JibX0NCi0tLQ0KDQpgYGB7ciB3YXJuaW5nPUZBTFNFfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KYGBge3J9DQpsb2FkKGZpbGUgPSAidGVzdDIuUkRhdGEiKQ0KZGF0PWRhdGEyDQpgYGANCg0KYGBge3J9DQpoZWFkKGRhdCkNCmBgYA0KDQoNCiMjIyA8dT4oYSkgUGVyZm9ybSB0aGUgbXVsdGlwbGUgcmVncmVzc2lvbiBtb2RlbCBhbmQgYW5hbHlzZSBhbGwgdGhlIG91dHB1dHMgdGhhdCBhcmUgYXZhaWxhYmxlLjwvdT4NCg0KYGBge3J9DQpMTSA9IGxtKFl+LixkYXRhID0gZGF0KQ0KYGBgDQoNCmBgYHtyfQ0KcGxvdChMTSwzKQ0KYGBgDQoNCmBgYHtyfQ0KcGxvdChMTSwyKQ0KYGBgDQoNCmBgYHtyfQ0Kc3VtbWFyeShMTSkNCmBgYA0KDQotIEFkanVzdGVkIFItc3F1YXJlZCBpcyBub3QgY2xvc2UgdG8gMTogdGhlIGxpbmVhciBtb2RlbCB3aWxsIG5vdCBiZSBhYmxlIHRvIGV4cGxhaW4gYWxsIHRoZSB2YXJpYW5jZQ0KLSBub2lzZSBpcyBnYXVzc2lhbjogZm9sbG93aW5nIHN0YXJpZ2h0IGxpbmUgb24gUVFwbG90DQotIHdlIGNhbiBzZWUgYWxzbyB0aGF0IG5vaXNlIGlzIG5vdCBob21vc2NlZGFzdGljOiBwb2ludHMgYXJlIG5vdCBzcHJlYWQgZXF1YWxseSBvbiBzdGFuZGFyZGl6ZWQgcmVzaWR1YWxzIHZzIGZpdHRlZCB2YWx1ZXMNCg0KIyMjIDx1PihiKSBJcyB0aGlzIG1vZGVsIGludGVyZXN0aW5nPzwvdT4NCg0KTW9kZWwgaXMgbm90IGludGVycmVzdGluZywgbm9pc2UgYXNzdW1wdGlvbnMgYXJlIG5vdCBzYXRpc2ZpZWQgYW5kIEFkanVzdGVkIFItc3F1YXJlZCBpcyBub3QgZ29vZC4NCg0KIyMjIDx1PihjKSBQZXJmb3JtIGEgbm9uLWxpbmVhciBtb2RlbCBhbmQgYW5hbHlzZSBpdC48L3U+DQoNCmBgYHtyfQ0KR0xNID0gZ2xtKFl+LixkYXRhID0gZGF0KQ0KYGBgDQoNCmBgYHtyfQ0Kc3VtbWFyeShHTE0pDQpgYGANCg0KIyMjIDx1PihkKSBXaGF0IGFyZSB0aGUgdmFyaWFibGVzIHRoYXQgYXJlIHJlYWxseSBjb25uZWN0ZWQgdG8gdGhlIHJlc3BvbnNlIHZhcmlhYmxlPzwvdT4NCg0KYGBge3J9DQpzdGVwKEdMTSkNCmBgYA0KDQo=</div>
 
 
 

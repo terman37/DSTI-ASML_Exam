@@ -38,9 +38,13 @@ plot(LM,2)
 summary(LM)
 ```
 
+- Adjusted R-squared is not close to 1: the linear model will not be able to explain all the variance
+- noise is gaussian: following staright line on QQplot
+- we can see also that noise is not homoscedastic: points are not spread equally on standardized residuals vs fitted values
+
 ### <u>(b) Is this model interesting?</u>
 
-
+Model is not interresting, noise assumptions are not satisfied and Adjusted R-squared is not good.
 
 ### <u>(c) Perform a non-linear model and analyse it.</u>
 
