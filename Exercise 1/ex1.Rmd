@@ -14,7 +14,6 @@ library(tidyverse)
 ```{r}
 dat = read.csv('data_ex1.csv')
 dat
-attach(dat)
 ```
 
 ### <u>a) Make a drawing of those observations</u>
@@ -51,6 +50,7 @@ summary(LM)
   - Std. Error: is the standard deviation of the estimate
   - t value: Estimate / Std. error
   - Pr(>|t|): probability to observe value larger than t
+  
     Student test performed for each parameter individually: H0 -> β1 = 0, H1 -> β1 != 0
     
     $$ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) 
@@ -58,6 +58,8 @@ summary(LM)
      \widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}} $$
 
 - Residual standard error:
+
+  estimation of parameter σ for residuals with distribution N(0;σ)
 
 - Multiple R-squared: 
   
@@ -70,23 +72,32 @@ summary(LM)
   
   corrected version of R², taking unbiased estimator for the variances 
 
-  $$ R_{adj}^{2}=1-\frac{n-1}{n-p-1}\left ( 1-R^{2} \right ) with: p\ nb\ of\ model\ in\ parameters $$
+  $$ R_{adj}^{2}=1-\frac{n-1}{n-p-1}\left ( 1-R^{2} \right ) with: p\ nb\ of\ parameters\ in\ model $$
 
 - F-statistic:
-
+  it's a global Fisher Test with H0: β1=β2=...βp=0 , H1: at least one parameter is different from 0.
+  
+  observed value of F where $$F =\frac{\frac{\left \| \widehat{Y_{1}}-\overline{Y_{n}} \right \|^{2}}{Rk(X)-1}}{\frac{\left \| Y-\widehat{Y_{1}} \right \|^{2}}{n -Rk(X)}} $$
+  
   - p-value:
-
-  F-Statistics is a test to validate the model: 
-  it's a global Fisher Test with H0: β1 = 0 , H1 β1 != 0
+  
+    p-value associated with the test: $$ P(F(Rk(X)-1);n-Rk(X) > F_{obs}) $$
+  
+    if p-value > α : do not reject H0
+  
+    if p-value < α : we reject H0
 
 ### <u>d) Construt a confidence interval at 95% for the regression curve, at a point x0</u>
 
 
-## **cf cours 20091212 page 5/15**
+The Confidence interval for E[Y] at point x0 with confidence level 100(1-α)% is:
+
+$$ \left [ \widehat{\beta _{0}}+\widehat{\beta _{1}}\pm \widehat{\sigma _{n}}\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{X_{n}})^{2}}{\sum (X_{i}-\overline{X_{n}})^{2}}} t_{1-\frac{\alpha }{2};n-2}\right ] $$
 
 
 ```{r}
 pred = predict(LM, dat,interval="confidence")
+pred
 ```
 
 
