@@ -29,8 +29,16 @@ We would like to analyse this table with a analysis of variance with two factors
 
 #### i. Can we say that the performance are not the same with respect to the team?
 
+```{r}
+boxplot(nb_defects~Team)
+```
+
 --> is there a link between team (X) and nb of defects (Y)
+
+- Test model = Yi = µ + ai + εi,j, H0: all ai are equals / H1: at least one ai is different
+
 - p-value > 0.05: we do not reject H0, we cannot say the performance is different among teams
+
 ```{r}
 mod=lm(nb_defects~Team)
 Anova(mod)
@@ -39,8 +47,15 @@ Anova(mod)
 
 #### ii. Can we say that the difficulties associated to each work station are not the same?
 
+```{r}
+boxplot(nb_defects~Workstation)
+```
+
 --> is there a link between workstation (X) and nb of defects (Y)
-- p-value < 0.05: we reject H0, nb of defect is dependent on workstation
+
+- Test model = Yi = µ + ai + εi,j, H0: all ai are equals / H1: at least one ai is different
+
+- p-value < 0.05: we reject H0, nb of defect is dependent on workstation (at least one)
 
 ```{r}
 mod=lm(nb_defects~Workstation)
@@ -56,14 +71,14 @@ LM=lm(nb_defects~Team+Workstation)
 #### i. How to validate the use of the additive model?
 
 Assumptions on the noise are ok
-**Check if the influence of the cross effect team*workstation is signifiant**
+We have to check if there is an influence of the cross effect Team*Workstation
 
 ```{r}
 cLM = lm(nb_defects~Team+Workstation+Team*Workstation)
 anova(cLM)
 ```
 
-As there is only one observatio for each cross effect parameter, we are not able to compute the F tests
+As there is only one observation for each cross effect parameter, we are not able to compute the F tests
 
 Check graphically that lines are parralel... no easy to see...
 
@@ -71,13 +86,16 @@ Check graphically that lines are parralel... no easy to see...
 interaction.plot(Team,Workstation,nb_defects)
 ```
 
-Another method is to use Tukey's test of additivity, described (here)[https://en.wikipedia.org/wiki/Tukey%27s_test_of_additivity]
+Another method is to use Tukey's test of additivity, described [here](https://en.wikipedia.org/wiki/Tukey%27s_test_of_additivity)
 and implemented in R using additivityTests library.
 
-from this test we see that p-value > 0.05 and so that additivity hypothesis cannot be rejected.
-**explain**
+Test model E[Yij] = µ + ai + bj + λ.ai.bj
 
-```{r}
+H0: λ = 0, H1: λ != 0
+
+From this test we see that p-value > 0.05 and so that additivity hypothesis cannot be rejected.
+
+```{r warning=FALSE}
 library(additivityTests)
 Y=t(matrix(dat$nb_defects,nrow=4))
 tukey.test(Y)
@@ -89,6 +107,18 @@ tukey.test(Y)
 summary(LM)
 ```
 
+E[Yi,j] = μ + ai + bj
+with 
+- μ = (Intercept) = 22
+- ai = estimate for Team
+- bi = estimate for Workstation
+
+ex: E[Y (for team="morning" and Workstation="C")] = 22 + 3 + 8 = 33 -> observed value = 35
+
+```{r}
+cbind(dat,predict(LM))
+```
+
 
 #### iii. Is the variable team influent?
 
@@ -96,9 +126,12 @@ summary(LM)
 anova(LM)
 ```
 
+p-value > 0.05: we do not reject H0, all ai can be considered equals -> no influence of Team variable
+
 #### iv. Is the variable work station influent?
 
 ```{r}
 anova(LM)
 ```
 
+p-value < 0.05: we reject H0, all ai cannot be considered equals -> there is an influence of Workstation variable
