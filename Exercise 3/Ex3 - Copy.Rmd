@@ -1,0 +1,119 @@
+---
+title: "ASML EXAM Exercise 3"
+output: html_notebook
+header-includes:
+   - \usepackage{bbm}
+---
+
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r}
+load(file = "test2.RData")
+dat=data2
+```
+
+```{r}
+head(dat)
+```
+
+
+### <u>(a) Perform the multiple regression model and analyse all the outputs that are available.</u>
+
+```{r}
+LM = lm(Y~.,data = dat)
+```
+
+```{r}
+plot(LM,3)
+```
+
+```{r}
+plot(LM,2)
+```
+
+```{r}
+summary(LM)
+```
+
+- Adjusted R-squared is not close to 1: the linear model will not be able to explain all the variance
+- noise is gaussian: following staright line on QQplot
+- we can see also that noise is not homoscedastic: points are not spread equally on standardized residuals vs fitted values
+
+### <u>(b) Is this model interesting?</u>
+
+Model is not interresting, noise assumptions are not satisfied and Adjusted R-squared is not good.
+
+### <u>(c) Perform a non-linear model and analyse it.</u>
+
+```{r}
+train_size = 85 / 100 * nrow(dat)
+idx.dat = sample.int(nrow(dat), size = train_size, replace = FALSE)
+dat_learn = dat[idx.dat,]
+dat_test = dat[-idx.dat,]
+```
+
+```{r}
+library(randomForest)
+rf_reg = randomForest(Y~.,data=dat_learn,xtest=dat_test[,-1],ytest=dat_test[,'Y'],ntree=20,importance=TRUE)
+rf_reg
+rf_reg$importance
+```
+
+```{r}
+BestTree <- function(X,Y){
+  # package about CART
+  library(rpart)
+  # generate max tree
+  TreeMAX = rpart(Y~.,data=X,control = rpart.control(cp=10^-9,minsplit=2))
+  # find cp corresponding to OneSE
+  CPs=TreeMAX$cptable
+  smallest_xerror = which(CPs[,'xerror'] == min(CPs[,'xerror']))
+  oneSE = CPs[smallest_xerror,'xerror']+CPs[smallest_xerror,'xstd']
+  CPBestTree = head(CPs[CPs[,'xerror']<=oneSE,],1)[,'CP']
+  # Prune Tree and return best tree
+  BestTree = prune(TreeMAX,cp=CPBestTree)
+}
+
+X = dat[,-1]
+Y = dat[,1]
+
+Tree = BestTree(X,Y)
+plot(Tree)
+text(Tree)
+
+printcp(Tree)
+
+```
+
+### <u>(d) What are the variables that are really connected to the response variable?</u>
+
+```{r}
+library(VSURF)
+
+vdat = VSURF(Y~., data=dat)
+vdat$varselect.thres
+vdat$varselect.interp
+vdat$varselect.pred
+
+```
+
+```{r}
+datc = dat[,c(5,2,8)]
+y = dat[,1]  
+```
+
+```{r}
+# then create CART tree with selected variables
+library(rpart)
+
+T = rpart(y~.,data = as.data.frame(datc),cp=10^-9,minsplit=2)
+plotcp(T)  
+printcp(T)
+TT = prune(T,cp=0.0225)
+plot(TT)
+text(TT)
+```
+
