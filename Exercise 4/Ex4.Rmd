@@ -59,19 +59,28 @@ Assumptions on the noise are ok
 **Check if the influence of the cross effect team*workstation is signifiant**
 
 ```{r}
+cLM = lm(nb_defects~Team+Workstation+Team*Workstation)
+anova(cLM)
+```
+
+As there is only one observatio for each cross effect parameter, we are not able to compute the F tests
+
+Check graphically that lines are parralel... no easy to see...
+
+```{r}
 interaction.plot(Team,Workstation,nb_defects)
 ```
 
+Another method is to use Tukey's test of additivity, described (here)[https://en.wikipedia.org/wiki/Tukey%27s_test_of_additivity]
+and implemented in R using additivityTests library.
+
+from this test we see that p-value > 0.05 and so that additivity hypothesis cannot be rejected.
+**explain**
 
 ```{r}
-summary(aov(nb_defects~Team+Workstation+Team*Workstation))
-```
-
-
-
-```{r}
-cLM = lm(nb_defects~Team+Workstation+Team*Workstation)
-anova(cLM)
+library(additivityTests)
+Y=t(matrix(dat$nb_defects,nrow=4))
+tukey.test(Y)
 ```
 
 #### ii. We accept the additive model. How to estimate E[Yi,j] in this model?
