@@ -1,0 +1,95 @@
+---
+title: "ASML EXAM Exercise 4"
+output: html_notebook
+header-includes:
+   - \usepackage{bbm}
+---
+
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(car)
+```
+
+
+Three teams take turns on a production line (morning, afternoon, night). They use four work stations denoted A,B,C and D. During one month, we count the number of defective parts according to the team and the work station. Here is the observations:
+
+```{r}
+dat = data.frame("Team"=factor(c(rep("Morning",4),rep("Afternoon",4),rep("Night",4))),
+           "Workstation"=factor(c(rep(c("A","B","C","D"),3))),
+           "nb_defects"=c(26,13,35,6,18,17,31,2,31,24,33,4))
+
+head(dat)
+attach(dat)
+```
+
+We would like to analyse this table with a analysis of variance with two factors
+
+### <u>(a) For the moment, we analyse the variables team and work station separately.</u>
+
+#### i. Can we say that the performance are not the same with respect to the team?
+
+--> is there a link between team (X) and nb of defects (Y)
+- p-value > 0.05: we do not reject H0, we cannot say the performance is different among teams
+```{r}
+mod=lm(nb_defects~Team)
+Anova(mod)
+```
+
+
+#### ii. Can we say that the difficulties associated to each work station are not the same?
+
+--> is there a link between workstation (X) and nb of defects (Y)
+- p-value < 0.05: we reject H0, nb of defect is dependent on workstation
+
+```{r}
+mod=lm(nb_defects~Workstation)
+Anova(mod)
+```
+
+### <u>(b) Now we take into account both variables in the same time. At first we consider the additive model Yi,j = µ + ai + bj + εi,j where the εi,j are i.i.d. random variables whose distribution is N (0, σ2).</u>
+
+```{r}
+LM=lm(nb_defects~Team+Workstation)
+```
+
+#### i. How to validate the use of the additive model?
+
+Assumptions on the noise are ok
+**Check if the influence of the cross effect team*workstation is signifiant**
+
+```{r}
+interaction.plot(Team,Workstation,nb_defects)
+```
+
+
+```{r}
+summary(aov(nb_defects~Team+Workstation+Team*Workstation))
+```
+
+
+
+```{r}
+cLM = lm(nb_defects~Team+Workstation+Team*Workstation)
+anova(cLM)
+```
+
+#### ii. We accept the additive model. How to estimate E[Yi,j] in this model?
+
+```{r}
+summary(LM)
+```
+
+
+#### iii. Is the variable team influent?
+
+```{r}
+anova(LM)
+```
+
+#### iv. Is the variable work station influent?
+
+```{r}
+anova(LM)
+```
+
