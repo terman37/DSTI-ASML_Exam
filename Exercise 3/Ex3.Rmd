@@ -39,7 +39,7 @@ summary(LM)
 ```
 
 - Adjusted R-squared is not close to 1: the linear model will not be able to explain all the variance
-- noise is gaussian: following staright line on QQplot
+- noise is gaussian: following straight line on QQplot
 - we can see also that noise is not homoscedastic: points are not spread equally on standardized residuals vs fitted values
 
 ### <u>(b) Is this model interesting?</u>
@@ -48,39 +48,58 @@ Model is not interresting, noise assumptions are not satisfied and Adjusted R-sq
 
 ### <u>(c) Perform a non-linear model and analyse it.</u>
 
-```{r}
-plot(Y~.,data = dat)
+```{r fig.width=15}
+library(car)
+```
+
+```{r fig.height=15, fig.width=15, warning=FALSE}
+scatterplotMatrix(dat)
 ```
 
 
-```{r}
-x = dat$X4
-
-hist(x)
-plot(dat$Y~x)
+```{r warning=FALSE}
+for(i in 2:10){
+  hist(dat[,i],freq = FALSE)
+}
 ```
 
 
+```{r fig.height=15, fig.width=15, warning=FALSE}
 
-```{r}
 dat2 = dat
-dat2$x1 = dat2$X1
-dat2$x2 = dat2$X2
-dat2$x3 = logit(dat2$X3)
-dat2$x4 = log(dat2$X4)
-dat2$x5 = dat2$X5
-dat2$x6 = dat2$X6
-dat2$x7 = dat2$X7
-dat2$x8 = dat2$X8
-dat2$x9 = log(dat2$X9)
+dat2$X1 = dat2$X1
+dat2$X2 = dat2$X2
+dat2$X3 = sqrt(dat2$X3)
+dat2$X4 = sqrt(dat2$X4)
+dat2$X5 = dat2$X5^2
+dat2$X6 = log(dat2$X6)
+dat2$X7 = dat2$X7
+dat2$X8 = dat2$X8
+dat2$X9 = dat2$X9
 
-LM = lm(Y~(x1+x2+x3+x4+x5+x6+x7+x8+x9),data = dat2)
+scatterplotMatrix(dat2[])
+# for(i in 2:10){
+#   hist(dat[,i],freq = FALSE )
+#   plot(dat[,i],dat2$Y,title(main = i-1))
+# }
+```
+
+```{r}
+mod = lm()
+```
+
+
+```{r}
+LM = lm(Y~.,data = dat)
+
+plot(LM,2)
 plot(LM,3)
 ```
 
 ```{r}
-plot(LM)
+summary(LM)
 ```
+
 
 
 

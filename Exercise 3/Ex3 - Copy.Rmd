@@ -49,20 +49,6 @@ Model is not interresting, noise assumptions are not satisfied and Adjusted R-sq
 ### <u>(c) Perform a non-linear model and analyse it.</u>
 
 ```{r}
-train_size = 85 / 100 * nrow(dat)
-idx.dat = sample.int(nrow(dat), size = train_size, replace = FALSE)
-dat_learn = dat[idx.dat,]
-dat_test = dat[-idx.dat,]
-```
-
-```{r}
-library(randomForest)
-rf_reg = randomForest(Y~.,data=dat_learn,xtest=dat_test[,-1],ytest=dat_test[,'Y'],ntree=20,importance=TRUE)
-rf_reg
-rf_reg$importance
-```
-
-```{r}
 BestTree <- function(X,Y){
   # package about CART
   library(rpart)
@@ -83,37 +69,12 @@ Y = dat[,1]
 Tree = BestTree(X,Y)
 plot(Tree)
 text(Tree)
-
-printcp(Tree)
-
 ```
 
 ### <u>(d) What are the variables that are really connected to the response variable?</u>
 
 ```{r}
-library(VSURF)
-
-vdat = VSURF(Y~., data=dat)
-vdat$varselect.thres
-vdat$varselect.interp
-vdat$varselect.pred
-
+printcp(Tree)
 ```
 
-```{r}
-datc = dat[,c(5,2,8)]
-y = dat[,1]  
-```
-
-```{r}
-# then create CART tree with selected variables
-library(rpart)
-
-T = rpart(y~.,data = as.data.frame(datc),cp=10^-9,minsplit=2)
-plotcp(T)  
-printcp(T)
-TT = prune(T,cp=0.0225)
-plot(TT)
-text(TT)
-```
 
