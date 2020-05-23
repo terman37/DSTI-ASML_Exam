@@ -77,4 +77,4 @@ text(Tree)
 printcp(Tree)
 ```
 
-
+X1, X4 and X7 are the variables used in tree construction, they are really connected to response variable.

@@ -56,14 +56,6 @@ library(car)
 scatterplotMatrix(dat)
 ```
 
-
-```{r warning=FALSE}
-for(i in 2:10){
-  hist(dat[,i],freq = FALSE)
-}
-```
-
-
 ```{r fig.height=15, fig.width=15, warning=FALSE}
 
 dat2 = dat
@@ -72,7 +64,7 @@ dat2$X2 = dat2$X2
 dat2$X3 = sqrt(dat2$X3)
 dat2$X4 = sqrt(dat2$X4)
 dat2$X5 = dat2$X5^2
-dat2$X6 = log(dat2$X6)
+dat2$X6 = sqrt(dat2$X6)
 dat2$X7 = dat2$X7
 dat2$X8 = dat2$X8
 dat2$X9 = dat2$X9
@@ -84,13 +76,9 @@ scatterplotMatrix(dat2[])
 # }
 ```
 
-```{r}
-mod = lm()
-```
-
 
 ```{r}
-LM = lm(Y~.,data = dat)
+LM = lm(Y~.,data = dat2)
 
 plot(LM,2)
 plot(LM,3)
