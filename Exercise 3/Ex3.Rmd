@@ -88,8 +88,18 @@ plot(LM,3)
 summary(LM)
 ```
 
+```{r}
+dat2 = dat[,-1]
+dat2 = lo
+LM = lm(Y~.,data = dat2)
 
+plot(LM,2)
+plot(LM,3)
+```
 
+```{r}
+summary(LM)
+```
 
 ### <u>(d) What are the variables that are really connected to the response variable?</u>
 

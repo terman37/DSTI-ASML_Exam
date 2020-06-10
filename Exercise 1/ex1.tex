@@ -1,0 +1,358 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={ASML EXAM Exercise 1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bbm}
+
+\title{ASML EXAM Exercise 1}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ---------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v tibble  2.1.3     v dplyr   0.8.5
+## v tidyr   1.0.2     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0
+## v purrr   0.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data\_ex1.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    observation       country percent_agricultural_population
+## 1            1   Switzerland                             4.0
+## 2            2        France                             5.7
+## 3            3        Sweden                             4.9
+## 4            4 United States                             3.0
+## 5            5        Russia                            14.8
+## 6            6         China                            69.6
+## 7            7         India                            63.8
+## 8            8        Brazil                            26.2
+## 9            9          Peru                            38.3
+## 10          10       Algeria                            24.7
+## 11          11         Zaire                            65.7
+##    calories_per_day_per_person
+## 1                         3432
+## 2                         3273
+## 3                         3049
+## 4                         3642
+## 5                         3394
+## 6                         2628
+## 7                         2204
+## 8                         2643
+## 9                         2192
+## 10                        2687
+## 11                        2159
+\end{verbatim}
+
+\hypertarget{a-make-a-drawing-of-those-observations}{%
+\subsubsection{a) Make a drawing of those
+observations}\label{a-make-a-drawing-of-those-observations}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ dat,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population,}\DataTypeTok{y=}\NormalTok{calories\_per\_day\_per\_person)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{shape=}\DecValTok{18}\NormalTok{,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{size=}\DecValTok{2}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label=}\NormalTok{country),}\DataTypeTok{hjust=}\DecValTok{0}\NormalTok{, }\DataTypeTok{vjust=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ex1_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\hypertarget{b-estimate-the-parameters-of-the-model-yi-ux3b20-ux3b21.xi-ux3b5i}{%
+\subsubsection{b) Estimate the parameters of the model: Yi = β0 + β1.xi
++
+εi}\label{b-estimate-the-parameters-of-the-model-yi-ux3b20-ux3b21.xi-ux3b5i}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LM =}\StringTok{ }\KeywordTok{lm}\NormalTok{(calories\_per\_day\_per\_person}\OperatorTok{\textasciitilde{}}\NormalTok{percent\_agricultural\_population,}\DataTypeTok{data=}\NormalTok{dat)}
+\NormalTok{LM}\OperatorTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     (Intercept) percent_agricultural_population 
+##                      3346.12221                       -17.16353
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  β0 = ``(Intercept)'' = 3346.12221
+\item
+  β1 = ``percent\_agricultural\_population'' = -17.16353
+\end{itemize}
+
+\hypertarget{c-explain-the-different-outputs-of-the-lm-funtions-used-in-the-r-software-and-precise-the-tests-that-are-performed-and-how-they-are-performed.}{%
+\subsubsection{c) Explain the different outputs of the lm funtions used
+in the R software and precise the tests that are performed and how they
+are
+performed.}\label{c-explain-the-different-outputs-of-the-lm-funtions-used-in-the-r-software-and-precise-the-tests-that-are-performed-and-how-they-are-performed.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(LM)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = calories_per_day_per_person ~ percent_agricultural_population, 
+##     data = dat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -496.76 -224.10  -47.09  228.21  476.46 
+## 
+## Coefficients:
+##                                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                     3346.122    144.476  23.160 2.48e-09 ***
+## percent_agricultural_population  -17.164      3.754  -4.572  0.00134 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 312.8 on 9 degrees of freedom
+## Multiple R-squared:  0.6991, Adjusted R-squared:  0.6656 
+## F-statistic: 20.91 on 1 and 9 DF,  p-value: 0.001342
+\end{verbatim}
+
+\begin{itemize}
+\item
+  Residuals:
+
+  Difference between observed value and the one predicted by the model.
+  We look for a symmetric distribution of the residuals around 0
+\item
+  Coefficients:
+
+  \begin{itemize}
+  \item
+    Estimate: Estimation of β0 and β1 of our model.
+  \item
+    Std. Error: is the standard deviation of the estimate
+  \item
+    t value: Estimate / Std. error
+  \item
+    Pr(\textgreater\textbar t\textbar): probability to observe value
+    larger than t
+
+    Student test performed for each parameter individually: H0
+    -\textgreater{} β1 = 0, H1 -\textgreater{} β1 != 0
+
+    \[ P_{H0}\left ( \left | \widehat{\beta _{1}} \right |>t \right ) 
+    with:
+     \widehat{\beta _{1}} = \frac{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )(Y_{i} - \bar{Y_{n}})}{\sum_{i=1}^{n}\left ( X_{i} - \bar{X_{n}} \right )^{2}} \]
+  \end{itemize}
+\item
+  Residual standard error:
+
+  estimation of parameter σ for residuals with distribution N(0;σ)
+\item
+  Multiple R-squared:
+
+  \[ R^{2} =\frac{\sum_{i=1}^{n}\left ( \widehat{Y_{i}}-\overline{Y_{n}} \right )^{2}}{\sum_{i=1}^{n}\left ( Y_{i}-\overline{Y_{n}} \right )^{2}} \]
+  also called coefficient of determination = variance explained / total
+  variance = 1 - (variance of residuals / variance total)
+
+  gives information about goodness of fit of the model, should be close
+  to one to be a correct linear model
+\item
+  Adjusted R-squared:
+
+  corrected version of R², taking unbiased estimator for the variances
+
+  \[ R_{adj}^{2}=1-\frac{n-1}{n-p-1}\left ( 1-R^{2} \right ) with: p\ nb\ of\ parameters\ in\ model \]
+\item
+  F-statistic: it's a global Fisher Test with H0: β1=β2=\ldots βp=0 ,
+  H1: at least one parameter is different from 0.
+
+  observed value of F where
+  \[F =\frac{\frac{\left \| \widehat{Y_{1}}-\overline{Y_{n}} \right \|^{2}}{Rk(X)-1}}{\frac{\left \| Y-\widehat{Y_{1}} \right \|^{2}}{n -Rk(X)}} \]
+
+  \begin{itemize}
+  \item
+    p-value:
+
+    p-value associated with the test:
+    \[ P(F(Rk(X)-1);n-Rk(X) > F_{obs}) \]
+
+    if p-value \textgreater{} α : do not reject H0
+
+    if p-value \textless{} α : we reject H0
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{d-construt-a-confidence-interval-at-95-for-the-regression-curve-at-a-point-x0}{%
+\subsubsection{d) Construt a confidence interval at 95\% for the
+regression curve, at a point
+x0}\label{d-construt-a-confidence-interval-at-95-for-the-regression-curve-at-a-point-x0}}
+
+The Confidence interval for E{[}Y{]} at point x0 with confidence level
+100(1-α)\% is:
+
+\[ \left [ \widehat{\beta _{0}}+\widehat{\beta _{1}}\pm \widehat{\sigma _{n}}\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{X_{n}})^{2}}{\sum (X_{i}-\overline{X_{n}})^{2}}} t_{1-\frac{\alpha }{2};n-2}\right ] \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(LM, dat,}\DataTypeTok{interval=}\StringTok{"confidence"}\NormalTok{)}
+\NormalTok{pred}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         fit      lwr      upr
+## 1  3277.468 2975.554 3579.382
+## 2  3248.290 2956.411 3540.170
+## 3  3262.021 2965.465 3558.577
+## 4  3294.632 2986.651 3602.612
+## 5  3092.102 2846.370 3337.834
+## 6  2151.540 1747.213 2555.868
+## 7  2251.089 1887.665 2614.512
+## 8  2896.438 2681.598 3111.277
+## 9  2688.759 2461.696 2915.822
+## 10 2922.183 2705.486 3138.880
+## 11 2218.478 1841.875 2595.081
+\end{verbatim}
+
+\hypertarget{e-draw-the-points-the-regression-curve-and-the-curves-associated-to-the-confident-interval-on-the-same-graphic.}{%
+\subsubsection{e) Draw the points, the regression curve and the curves
+associated to the confident interval on the same
+graphic.}\label{e-draw-the-points-the-regression-curve-and-the-curves-associated-to-the-confident-interval-on-the-same-graphic.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat2 =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(dat,pred)}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{dat2 ) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population, }\DataTypeTok{y=}\NormalTok{calories\_per\_day\_per\_person),}\DataTypeTok{shape=}\DecValTok{18}\NormalTok{,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{size=}\DecValTok{2}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population, }\DataTypeTok{y=}\NormalTok{calories\_per\_day\_per\_person,}\DataTypeTok{label=}\NormalTok{country),}\DataTypeTok{hjust=}\DecValTok{0}\NormalTok{, }\DataTypeTok{vjust=}\DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population, }\DataTypeTok{y=}\NormalTok{fit),}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population, }\DataTypeTok{y=}\NormalTok{lwr),}\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{percent\_agricultural\_population, }\DataTypeTok{y=}\NormalTok{upr),}\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ex1_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\end{document}

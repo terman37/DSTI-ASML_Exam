@@ -35,7 +35,7 @@ plot(LM,2)
 ```
 
 ```{r}
-summary(LM)
+summary(LM) 
 ```
 
 - Adjusted R-squared is not close to 1: the linear model will not be able to explain all the variance

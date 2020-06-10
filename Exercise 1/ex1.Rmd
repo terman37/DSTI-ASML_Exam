@@ -1,8 +1,9 @@
 ---
 title: "ASML EXAM Exercise 1"
-output: html_notebook
-header-includes:
-   - \usepackage{bbm}
+output:
+  pdf_document: default
+  html_notebook: default
+header-includes: \usepackage{bbm}
 ---
 
 ```{r warning=FALSE}
@@ -27,7 +28,7 @@ ggplot(data = dat,aes(x=percent_agricultural_population,y=calories_per_day_per_p
 ### <u>b) Estimate the parameters of the model: Yi = β0 + β1.xi + εi</u>
 
 ```{r}
-LM = lm(calories_per_day_per_person~percent_agricultural_population)
+LM = lm(calories_per_day_per_person~percent_agricultural_population,data=dat)
 LM$coefficients
 ```
 

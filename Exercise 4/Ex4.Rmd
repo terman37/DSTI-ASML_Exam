@@ -108,7 +108,9 @@ summary(LM)
 ```
 
 E[Yi,j] = μ + ai + bj
+
 with 
+
 - μ = (Intercept) = 22
 - ai = estimate for Team
 - bi = estimate for Workstation
